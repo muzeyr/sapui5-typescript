@@ -1,0 +1,130 @@
+<mvc:View
+    controllerName="com.uzi.controller.Main"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:cssgrid="sap.ui.layout.cssgrid"
+    core:require="{
+        formatter: 'com/uzi//model/formatter'
+    }"
+>
+    <Page title="{i18n>currentWeatherTitle}">
+        <content>
+            <FlexBox
+                alignItems="Center"
+                justifyContent="SpaceBetween"
+            >
+                <Input
+                    value="{
+                        path: '/location',
+                        type: 'sap.ui.model.type.String'
+                    }"
+                    change=".onInputLocationChange"
+                    placeholder="Enter Location"
+                    submit=".onInputLocationChange"
+                    showClearIcon="true"
+                    width="100%"
+                >
+                    <layoutData>
+                        <FlexItemData growFactor="1" />
+                    </layoutData>
+                    <suggestionItems>
+                        <core:Item
+                            key="{
+                            }"
+                            text="{
+                            }"
+                        />
+                    </suggestionItems>
+                </Input>
+                <Button
+                    icon="sap-icon://search"
+                    press=".onInputLocationChange"
+                />
+            </FlexBox>
+            <HBox
+                justifyContent="SpaceBetween"
+                wrap="Wrap"
+            />
+            <ScrollContainer
+                height="100%"
+                width="100%"
+                horizontal="true"
+                vertical="false"
+            >
+                <HBox items="{/locations}">
+                    <items>
+                        <VBox width="400px">
+                            <form:SimpleForm>
+                                <form:content>
+                                    <HBox alignItems="Center">
+                                        <core:Icon
+                                            src="sap-icon://map"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Label text="{i18n>place}" />
+                                    </HBox>
+                                    <Text text="{
+                                        path: 'name',
+                                        formatter: '.formatDisplayName'
+                                    }" />
+                                    <HBox alignItems="Center">
+                                        <core:Icon
+                                            src="sap-icon://display"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Label text="{i18n>displayName}" />
+                                    </HBox>
+                                    <Text text="{
+                                        path: 'display_name',
+                                        formatter: '.formatDisplayName'
+                                    }" />
+                                    <HBox alignItems="Center">
+                                        <core:Icon
+                                            src="sap-icon://locate-me"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Label text="{i18n>latitude}" />
+                                    </HBox>
+                                    <Text text="{
+                                        path: 'lat',
+                                        formatter: '.formatDisplayName'
+                                    }" />
+                                    <HBox alignItems="Center">
+                                        <core:Icon
+                                            src="sap-icon://locate-me"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Label text="{i18n>longitude}" />
+                                    </HBox>
+                                    <Text text="{
+                                        path: 'lon',
+                                        formatter: '.formatDisplayName'
+                                    }" />
+                                    <HBox alignItems="Center">
+                                        <core:Icon
+                                            src="sap-icon://wind"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Label text="{i18n>winddirection}" />
+                                    </HBox>
+                                    <Text text="{temperature/current_weather/winddirection} {temperature/current_weather_units/windspeed}" />
+                                    <HBox alignItems="Center">
+                                        <core:Icon
+                                            src="sap-icon://temperature"
+                                            class="sapUiTinyMarginEnd"
+                                        />
+                                        <Label text="{i18n>temperature}" />
+                                    </HBox>
+                                    <Text text="{temperature/current_weather/temperature} {temperature/current_weather_units/temperature}" />
+                                </form:content>
+                            </form:SimpleForm>
+                        </VBox>
+                    </items>
+                </HBox>
+            </ScrollContainer>
+        </content>
+    </Page>
+</mvc:View>
